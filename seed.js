@@ -16,7 +16,7 @@ const sampleMovies = [
         averageRating: 9.3,
         viewCount: 1500000,
         featured: true,
-        poster: "file.jpg",
+        poster: "the-shawshank.jpg",
         createdAt: new Date()
     },
     {
@@ -27,7 +27,7 @@ const sampleMovies = [
         averageRating: 9.2,
         viewCount: 1200000,
         featured: true,
-        poster: "file.jpg",
+        poster: "god_father.jpg",
         createdAt: new Date()
     },
     {
@@ -38,7 +38,7 @@ const sampleMovies = [
         averageRating: 9.0,
         viewCount: 1800000,
         featured: true,
-        poster: "file.jpg",
+        poster: "the-dark.jpg",
         createdAt: new Date()
     },
     {
@@ -49,7 +49,7 @@ const sampleMovies = [
         averageRating: 8.9,
         viewCount: 1100000,
         featured: false,
-        poster: "file.jpg",
+        poster: "pulp_fiction.jpg",
         createdAt: new Date()
     },
     {
@@ -60,7 +60,7 @@ const sampleMovies = [
         averageRating: 8.8,
         viewCount: 1000000,
         featured: false,
-        poster: "file.jpg",
+        poster: "forrest-gump.jpg",
         createdAt: new Date()
     }
 ];
