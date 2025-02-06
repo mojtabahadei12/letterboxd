@@ -17,26 +17,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <% if (featuredMovies && featuredMovies.length > 0) { %>
-            <div class="hero-slider">
-                <% featuredMovies.forEach(movie => { %>
-                    <div class="hero-slide">
-                        <img src="/images/<%= movie.poster %>" alt="<%= movie.title %>">
-                        <div class="hero-content">
-                            <h1><%= movie.title %></h1>
-                            <p><%= movie.description.substring(0, 100) %>...</p>
-                            <a href="/movies/<%= movie._id %>" class="btn">View Details</a>
-                        </div>
-                    </div>
-                <% }) %>
-            </div>
-        <% } else { %>
-            <p>No featured movies available.</p>
-        <% } %>
-    </section>
-
     <!-- Top Rated Movies -->
     <section class="movies-section">
         <h2>Top Rated Movies</h2>

@@ -4,29 +4,26 @@ const router = express.Router();
 const User = require('../models/User');
 const { protect } = require('../middleware/authMiddleware');
 
-// دنبال کردن یک کاربر
 router.post('/:id', protect, async (req, res) => {
   try {
     const userToFollow = await User.findById(req.params.id);
     if (!userToFollow) {
-      return res.status(404).json({ message: 'کاربر مورد نظر یافت نشد.' });
+      return res.status(404).json({ message: 'this user not found.' });
     }
 
     const currentUser = await User.findById(req.user._id);
 
-    // بررسی اینکه آیا کاربر از قبل دنبال شده است
     if (currentUser.following.includes(userToFollow._id)) {
-      return res.status(400).json({ message: 'شما این کاربر را قبلاً دنبال کرده‌اید.' });
+      return res.status(400).json({ message: 'you are followed this user before.' });
     }
 
-    // اضافه کردن کاربر به لیست following
     currentUser.following.push(userToFollow._id);
     await currentUser.save();
 
-    res.status(200).json({ message: 'کاربر با موفقیت دنبال شد.' });
+    res.status(200).json({ message: 'user followed successfully!' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'خطای سرور.' });
+    res.status(500).json({ message: 'server error.' });
   }
 });
 

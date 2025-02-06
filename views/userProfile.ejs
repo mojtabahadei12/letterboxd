@@ -26,11 +26,9 @@
           <ul class="reviews-list">
             <% reviews.forEach(review => { %>
               <li class="review-item">
-                <!-- تصویر فیلم -->
                 <div class="review-poster">
                   <img src="/images/<%= review.movie.poster %>" alt="<%= review.movie.title %> Poster">
                 </div>
-                <!-- اطلاعات فیلم و نقد -->
                 <div class="review-details">
                   <h3><%= review.movie.title %></h3>
                   <p><strong>Genre:</strong> <%= review.movie.genre %></p>

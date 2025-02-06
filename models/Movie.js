@@ -41,4 +41,5 @@ movieSchema.virtual('averageRating').get(function() {
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
+
 module.exports = Movie;

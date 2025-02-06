@@ -28,9 +28,7 @@
             <li>
               <p><strong>Name:</strong> <%= friend.name %></p>
               <p><strong>Email:</strong> <%= friend.email %></p>
-              <!-- لینک برای مشاهده نظرات دوست -->
               <a href="/friends/<%= friend._id %>/reviews" class="view-reviews-btn">View Reviews</a>
-              <!-- فرم حذف دوست -->
               <form action="/friends/remove/<%= friend._id %>" method="POST" style="display:inline;">
                 <button type="submit" class="remove-btn">Remove Friend</button>
               </form>

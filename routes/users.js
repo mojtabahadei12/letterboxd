@@ -9,7 +9,6 @@ router.get('/dashboard', protect, async (req, res) => {
   try {
     const { genre, year, rating } = req.query;
 
-    // ساخت کوئری برای فیلتر کردن فیلم‌ها
     const query = {};
     if (genre) {
       query.genre = { $regex: new RegExp(genre, 'i') };
@@ -21,25 +20,21 @@ router.get('/dashboard', protect, async (req, res) => {
       query.rating = { $gte: parseFloat(rating) };
     }
 
-    // دریافت فیلم‌ها بر اساس فیلتر (محدود به 20 فیلم)
     const movies = await Movie.find(query).limit(20);
 
-    // دریافت دوستان کاربر فعلی
     const user = await User.findById(req.user._id).populate('following');
     const friendsIds = user.following.map(friend => friend._id);
 
-    // دریافت فعالیت‌های دوستان (فرض می‌کنیم فعالیت‌ها شامل نقدها است)
     const friendsActivities = await Review.find({ user: { $in: friendsIds } })
-      .populate('user', 'name') // برای دریافت نام دوستان
-      .populate('movie', 'title') // برای دریافت عنوان فیلم‌ها
-      .sort({ createdAt: -1 }) // مرتب‌سازی بر اساس جدیدترین فعالیت‌ها
-      .limit(10); // محدود کردن تعداد فعالیت‌ها
+      .populate('user', 'name')
+      .populate('movie', 'title')
+      .sort({ createdAt: -1 })
+      .limit(10);
 
-    // ارسال داده‌ها به EJS
     res.render('userDashboard', { 
       user: req.user, 
       movies, 
-      friendsActivities // اضافه کردن فعالیت‌های دوستان
+      friendsActivities
     });
   } catch (error) {
     console.error(error);
@@ -49,13 +44,10 @@ router.get('/dashboard', protect, async (req, res) => {
 
 router.get('/profile', protect, async (req, res) => {
   try {
-    // دریافت اطلاعات کاربر فعلی
     const user = req.user;
-
-    // دریافت نقدهای کاربر به همراه اطلاعات فیلم‌ها
     const reviews = await Review.find({ user: user._id })
-      .populate('movie', 'title genre releaseYear poster') // دریافت اطلاعات فیلم
-      .sort({ createdAt: -1 }); // مرتب‌سازی بر اساس جدیدترین نقدها
+      .populate('movie', 'title genre year poster')
+      .sort({ createdAt: -1 });
 
     res.render('userProfile', { user, reviews });
   } catch (error) {

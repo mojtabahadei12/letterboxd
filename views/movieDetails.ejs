@@ -33,7 +33,6 @@
             <p><%= review.text %></p>
             <p><small>By: <%= review.user.name %> on <%= review.createdAt.toLocaleDateString() %></small></p>
             
-            <!-- دکمه دنبال کردن -->
             <% if (user && user._id.toString() !== review.user._id.toString()) { %>
               <button class="follow-btn" data-user-id="<%= review.user._id %>">
                 Follow <%= review.user.name %>
@@ -70,7 +69,6 @@
   <%- include('./partials/footer.ejs') %>
 
   <script>
-    // اضافه کردن رویداد کلیک برای دکمه‌های دنبال کردن
     document.querySelectorAll('.follow-btn').forEach(button => {
       button.addEventListener('click', async () => {
         const userId = button.getAttribute('data-user-id');
@@ -84,7 +82,7 @@
 
           if (response.ok) {
             alert('User followed successfully!');
-            button.disabled = true; // غیرفعال کردن دکمه پس از دنبال کردن
+            button.disabled = true;
             button.textContent = 'Following';
           } else {
             const data = await response.json();

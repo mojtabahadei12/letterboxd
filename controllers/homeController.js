@@ -3,9 +3,6 @@ const Movie = require('../models/Movie');
 
 const getHomePageContent = async (req, res) => {
     try {
-        const featuredMovies = await Movie.find({ featured: true })
-            .limit(5)
-            .select('title poster description _id');
 
         const topRatedMovies = await Movie.find()
             .sort({ averageRating: -1 })
@@ -30,7 +27,6 @@ const getHomePageContent = async (req, res) => {
         ]);
 
         res.render('index', {
-            featuredMovies,
             topRatedMovies,
             newestMovies,
             trendingMovies,
